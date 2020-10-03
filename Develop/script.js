@@ -12,44 +12,158 @@ function writePassword() {
 function generatePassword() {
   //variable for possible password characters
   var lowerCase = "abcdefghijklmnopqrstuvwxyz";
-  var uperCase = "ABCDEFGHIJKLMNOPQRST";
-  var digits = "0123456789"
-  var symbols = "@!#$%&*"
+  var uperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var digit = "0123456789";
+  var symbol = "@!#$%&*";
 
-  // user promps
-  var passLength = window.prompt("What is the passwrod length? ");
-  // converting prompt from text to integer 
-  passLength = parseInt(passLength);
-  var upCaseCnfrm = window.confirm("Would you like to include uppercase letters?")
-  var symbolCnfrm = window.confirm("Would you like to include symbols?")
-  var digitsCnfrm = window.confirm("Would you like to include digits?")
-  var generPass = '';
+  var generPass = "";
 
-  // selecting random lowercase characters
-  for (i = 0; i < (passLength - 3); i++) {
-    n = randomNum(lowerCase);
-    generPass += lowerCase.charAt(n);
+  // extracting selected criteria based on promps
+  var selctdCriteria = getPassCriteria();
+
+  // iterating through char types to get random characters
+  var lowerCases = selctdCriteria[1];
+  if (lowerCases > 0) {
+    for (i = 0; i < lowerCases; i++) {
+      n = randomNum(lowerCase);
+      if (!generPass.includes(lowerCase.charAt(n))) {
+        generPass += lowerCase.charAt(n);
+      } else {
+        i--;
+      }
+    }
   }
 
-  // adding character types per user request
-  if (upCaseCnfrm) {
-    generPass += uperCase.charAt(randomNum(uperCase));
-  };
-  if (symbolCnfrm) {
+  var uperCases = selctdCriteria[2];
+  if (uperCases > 0) {
+    for (i = 0; i < uperCases; i++) {
+      n = randomNum(uperCase);
+      if (!generPass.includes(lowerCase.charAt(n))) {
+        generPass += uperCase.charAt(n);
+      } else {
+        i--;
+      }
+    }
+  }
+  var symbols = selctdCriteria[3];
+  if (symbols > 0) {
+    for (i = 0; i < symbols; i++) {
+      n = randomNum(symbol);
+      if (!generPass.includes(lowerCase.charAt(n))) {
+        generPass += symbol.charAt(n);
+      } else {
+        i--;
+      }
+    }
+  }
+  var digits = selctdCriteria[4];
+  if (digits > 0) {
+    for (i = 0; i < digits; i++) {
+      n = randomNum(digit);
+      if (!generPass.includes(lowerCase.charAt(n))) {
+        generPass += digit.charAt(n);
+      } else {
+        i--;
+      }
+    }
+  }
+  return randomString(generPass);
+}
 
-    generPass += symbols.charAt(randomNum(symbols));
-  };
-  if (digitsCnfrm) {
-    generPass += digits.charAt(randomNum(digits));
-
-  };
-  return generPass;
-};
-
+// function to randomize selection of index
 function randomNum(chartrs) {
   var randomI = Math.floor(Math.random() * (chartrs.length + 1));
   return randomI;
-};
+}
+
+// function to randomize order of characters in password
+function randomString(string) {
+  var newString = "";
+  var charN = "";
+  for (i = 0; i < string.length; i++) {
+    charN = string.charAt(randomNum(string));
+    if (!newString.includes(charN)) {
+      newString += charN;
+    } else {
+      i--;
+    }
+  }
+  return newString;
+}
+
+// function to extract password length and character types
+function getPassCriteria() {
+  criteria = [];
+
+  // converting prompt from text to integer
+  var passLength = parseInt(
+    window.prompt("What is the passwrod length? (can be 8 to 128 characters)")
+  );
+  if (!passLength || isNaN(passLength) || passLength < 8 || passLength > 128) {
+    alert("Please enter a numeric value between 8 to 128.");
+    return getPassCriteria();
+  }
+
+  var lwrCaseConfrm = window.confirm(
+    "Would you like to include lowercase letters?"
+  );
+  if (lwrCaseConfrm) {
+    var lwrCaseNum = parseInt(
+      window.prompt("How many characters should be lowercase")
+    );
+  }
+  if (!lwrCaseConfrm || !lwrCaseNum || isNaN(lwrCaseNum)) {
+    var lwrCaseNum = 0;
+  }
+
+  var upCaseCnfrm = window.confirm(
+    "Would you like to include uppercase letters?"
+  );
+  if (upCaseCnfrm) {
+    var upCaseNum = parseInt(
+      window.prompt("How many characters should be uppercase")
+    );
+  }
+  if (!upCaseCnfrm || !upCaseNum || isNaN(upCaseNum)) {
+    var upCaseNum = 0;
+  }
+
+  var symbolCnfrm = window.confirm("Would you like to include symbols?");
+  if (symbolCnfrm) {
+    var symbolNum = parseInt(
+      window.prompt("How many characters should be uppercase")
+    );
+  }
+  if (!symbolCnfrm || !symbolNum || isNaN(symbolNum)) {
+    var symbolNum = 0;
+  }
+
+  var digitsCnfrm = window.confirm("Would you like to include digits?");
+  if (digitsCnfrm) {
+    var digitsNum = parseInt(
+      window.prompt("How many characters should be digits")
+    );
+  }
+  if (!digitsCnfrm || !digitsNum || isNaN(digitsNum)) {
+    var digitsNum = 0;
+  }
+
+  if (
+    (lwrCaseNum === 0 &&
+      upCaseNum === 0 &&
+      symbolNum === 0 &&
+      digitsNum === 0) ||
+    upCaseNum + symbolNum + digitsNum + lwrCaseNum != passLength
+  ) {
+    alert(
+      "Please enter a numeric value for at least one of the character types and ensure sum of character types equal totla password length"
+    );
+    return getPassCriteria();
+  }
+
+  criteria.push(passLength, lwrCaseNum, upCaseNum, symbolNum, digitsNum);
+  return criteria;
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
