@@ -1,20 +1,12 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
-}
 
 // function to produce a password based on criteria
 function generatePassword() {
   //variable for possible password characters
   var lowerCase = "abcdefghijklmnopqrstuvwxyz";
-  var uperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var uprCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var digit = "0123456789";
-  var symbol = "@!#$%&*";
+  var symbol = "@!#$%&*'()+,-./:<;=>?[]`{}~\"";
 
   var generPass = "";
 
@@ -34,12 +26,12 @@ function generatePassword() {
     }
   }
 
-  var uperCases = selctdCriteria[2];
-  if (uperCases > 0) {
-    for (i = 0; i < uperCases; i++) {
-      n = randomNum(uperCase);
-      if (!generPass.includes(lowerCase.charAt(n))) {
-        generPass += uperCase.charAt(n);
+  var uprCases = selctdCriteria[2];
+  if (uprCases > 0) {
+    for (i = 0; i < uprCases; i++) {
+      n = randomNum(uprCase);
+      if (!generPass.includes(uprCase.charAt(n))) {
+        generPass += uprCase.charAt(n);
       } else {
         i--;
       }
@@ -49,18 +41,19 @@ function generatePassword() {
   if (symbols > 0) {
     for (i = 0; i < symbols; i++) {
       n = randomNum(symbol);
-      if (!generPass.includes(lowerCase.charAt(n))) {
+      if (!generPass.includes(symbol.charAt(n))) {
         generPass += symbol.charAt(n);
       } else {
         i--;
       }
     }
   }
+
   var digits = selctdCriteria[4];
   if (digits > 0) {
     for (i = 0; i < digits; i++) {
       n = randomNum(digit);
-      if (!generPass.includes(lowerCase.charAt(n))) {
+      if (!generPass.includes(digit.charAt(n))) {
         generPass += digit.charAt(n);
       } else {
         i--;
@@ -109,7 +102,7 @@ function getPassCriteria() {
   );
   if (lwrCaseConfrm) {
     var lwrCaseNum = parseInt(
-      window.prompt("How many characters should be lowercase")
+      window.prompt("How many characters should be lowercase?")
     );
   }
   if (!lwrCaseConfrm || !lwrCaseNum || isNaN(lwrCaseNum)) {
@@ -121,7 +114,7 @@ function getPassCriteria() {
   );
   if (upCaseCnfrm) {
     var upCaseNum = parseInt(
-      window.prompt("How many characters should be uppercase")
+      window.prompt("How many characters should be uppercase?")
     );
   }
   if (!upCaseCnfrm || !upCaseNum || isNaN(upCaseNum)) {
@@ -131,7 +124,7 @@ function getPassCriteria() {
   var symbolCnfrm = window.confirm("Would you like to include symbols?");
   if (symbolCnfrm) {
     var symbolNum = parseInt(
-      window.prompt("How many characters should be uppercase")
+      window.prompt("How many characters should be symbols?")
     );
   }
   if (!symbolCnfrm || !symbolNum || isNaN(symbolNum)) {
@@ -141,7 +134,7 @@ function getPassCriteria() {
   var digitsCnfrm = window.confirm("Would you like to include digits?");
   if (digitsCnfrm) {
     var digitsNum = parseInt(
-      window.prompt("How many characters should be digits")
+      window.prompt("How many characters should be digits?")
     );
   }
   if (!digitsCnfrm || !digitsNum || isNaN(digitsNum)) {
@@ -156,7 +149,7 @@ function getPassCriteria() {
     upCaseNum + symbolNum + digitsNum + lwrCaseNum != passLength
   ) {
     alert(
-      "Please enter a numeric value for at least one of the character types and ensure sum of character types equal totla password length"
+      "Please enter a numeric value for at least one character types and ensure sum of character types equal password length"
     );
     return getPassCriteria();
   }
@@ -165,6 +158,16 @@ function getPassCriteria() {
   return criteria;
 }
 
+// Get references to the #generate element
+var generateBtn = document.querySelector("#generate");
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+}
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-console.log(generatePassword());
