@@ -5,28 +5,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Password Generator</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="./Assets/css/style.css" />
+  <title>Password Generator</title>
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      <h1>Password Generator</h1>
-    </header>
-    <div class="card">
-      <div class="card-header">
-        <h2>Generate a Password</h2>
+  <header>
+    <h1>Password Generator</h1>
+  </header>
+  <div class="container">
+    <div class="main-image">
+
+
+      <div class="row main-area">
+        <div class="col s12 m12 l12 center center">
+          <h2>Generate a Password<br /></h2>
+          <div class="card-body">
+            <textarea readonly id="password" placeholder="Your Secure Password"
+              aria-label="Generated Password"></textarea>
+          </div>
+          <div class="card-footer">
+            <button id="generate" class="btn center"><span class="center">Generate Password</span></button>
+          </div>
+        </div>
       </div>
-      <div class="card-body">
-        <textarea readonly id="password" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
-      </div>
-      <div class="card-footer">
-        <button id="generate" class="btn">Generate Password</button>
-      </div>
+
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./Assets/js/script.js"></script>
   </div>
-  <script src="./Assets/js/script.js"></script>
 </body>
 
 </html>

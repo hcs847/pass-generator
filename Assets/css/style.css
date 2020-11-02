@@ -12,34 +12,53 @@ body,
   padding: 0;
 }
 
-body {
-  font-family: sans-serif;
-  background-color: #f9fbfd;
-}
 
-.wrapper {
-  padding-top: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
+.main-image {
+  background-image: url("./mobile-screen.png");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
 }
 
 header {
   text-align: center;
-  padding: 20px;
-  padding-top: 0px;
-  color: hsl(206, 17%, 28%);
+  font-weight: 600;
+  padding: 1rem;
+  color: white;
+  background-color: darkslateblue;
+  margin-bottom: 3.5rem;
+}
+
+h2 {
+  font-size: 2.3rem;
+  font-weight: 600;
+  color: rgb(25, 15, 94);
+  margin-top: 7.5rem;
+
 }
 
 .card {
-  background-color: hsl(0, 0%, 100%);
-  border-radius: 5px;
-  border-width: 1px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+  background-color: transparent;
   color: hsl(206, 17%, 28%);
-  font-size: 18px;
+  font-size: 2rem;
   margin: 0 auto;
-  max-width: 800px;
-  padding: 30px 40px;
+  max-width: 25%x;
+  padding: 1rem 2rem;
+  box-shadow: none;
+
+}
+
+.main-area {
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 22%;
 }
 
 .card-header::after {
@@ -52,17 +71,19 @@ header {
 
 .card-body {
   min-height: 100px;
+  border: none;
 }
 
 .card-footer {
   text-align: center;
+
 }
 
 .card-footer::before {
   content: " ";
   display: block;
   width: 100%;
-  background: #e7e9eb;
+
   height: 2px;
 }
 
@@ -73,17 +94,17 @@ header {
 }
 
 .btn {
-  border: none;
+
   background-color: hsl(360, 91%, 36%);
-  border-radius: 25px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
-    0px;
+  border-radius: 0.6rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px;
   color: hsl(0, 0%, 100%);
   display: inline-block;
-  font-size: 22px;
-  line-height: 22px;
-  margin: 16px 16px 16px 20px;
-  padding: 14px 34px;
+  width: 100%;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 16px 16px 16px 0px;
+  padding: 0.1rem;
   text-align: center;
   cursor: pointer;
 }
@@ -98,25 +119,18 @@ button[disabled] {
 }
 
 #password {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   border: none;
   display: block;
-  width: 100%;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 85px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px dashed #c0c7cf;
-  border-radius: 6px;
-  resize: none;
-  overflow: hidden;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
+
+/* 
+.container {
+  width: 25%;
+} */
 
 @media (max-width: 690px) {
   .btn {
@@ -128,10 +142,16 @@ button[disabled] {
   #password {
     font-size: 1rem;
   }
+
+
 }
 
 @media (max-width: 500px) {
   .btn {
     font-size: 0.8rem;
+  }
+
+  h2 {
+    font-size: 1rem;
   }
 }
